@@ -33,7 +33,10 @@ func main() {
 
 	conn, err := pgxpool.New(ctx, dbAddressString)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to create connection pool: %v\n", err)
+		_, err := fmt.Fprintf(os.Stderr, "Unable to create connection pool: %v\n", err)
+		if err != nil {
+			return
+		}
 		os.Exit(1)
 	}
 	defer conn.Close()
