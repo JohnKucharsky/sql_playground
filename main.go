@@ -24,14 +24,12 @@ func main() {
 
 	ctx := context.Background()
 
-	//db
 	dbAddress := "postgres://postgres:pass@db:5432/data?sslmode=disable"
 	dbAddressEnv := os.Getenv("DB_URL")
 	var dbAddressString = dbAddressEnv
 	if dbAddressEnv == "" {
 		dbAddressString = dbAddress
 	}
-	//end db
 
 	conn, err := pgxpool.New(ctx, dbAddressString)
 	if err != nil {
